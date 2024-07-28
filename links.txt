@@ -1,0 +1,8 @@
+Pull  global  surfacetemperature data from the appropriate sources.  
+Take a look at the following IPCCand  NOAA  websites  to  get  yourself  started:
+    https://www.ipcc-data.org/#details
+    https://www.ncei.noaa.gov/cdo-web/datasets.Alternatively
+your  can  useMathematica(not  free  software)  for  this  task  via  itsWeatherDatacommand:https://reference.wolfram.com/language/ref/WeatherData.html).  
+
+
+
