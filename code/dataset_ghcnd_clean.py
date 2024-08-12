@@ -143,21 +143,20 @@ def generate_station_summary(input_directory, output_filepath):
 
 
 def station_summary(input_folder, inventory_file_path, output_file_path):
-    # Step 1: Read the inventory CSV file
+    # read the inventory CSV file
     inventory_df = pd.read_csv(inventory_file_path, encoding='ISO-8859-1')
 
-    # Initialize the list to store the results
     results = []
     total_files = len([f for f in os.listdir(input_folder) if f.endswith('.csv')])
     count = 0
     
-    # Step 2: Read each CSV file in the input folder
+    # csv files in the input folder
     for filename in os.listdir(input_folder):
         if filename.endswith('.csv'):
             
             station_id = os.path.splitext(filename)[0]  # Get station ID from filename
 
-            # Step 3: Find the corresponding row in the inventory DataFrame
+            # find station id
             station_info = inventory_df[inventory_df['Station_ID'] == station_id]
 
             if not station_info.empty:
@@ -169,33 +168,31 @@ def station_summary(input_folder, inventory_file_path, output_file_path):
                 start_date = str(station_info['Data_start'].values[0])
                 end_date = str(station_info['Data_end'].values[0])
 
-                # Step 4: Check for invalid start dates and correct if necessary
+                # check for invalid start dates and correct if necessary
                 if len(start_date) < 4 or int(start_date) < 1500 or len(end_date) < 4 or int(end_date) < 1500:
                     print(f"Invalid start date for {station_id}, determining from file")
                     
-                    # Open the station's CSV file to determine date range
+                    # open the station's CSV file to determine date range
                     station_file_path = os.path.join(input_folder, filename)
                     station_data = pd.read_csv(station_file_path)
                     
-                    # Convert 'date' column to datetime format
                     station_data['DATE'] = pd.to_datetime(station_data['DATE'])
                     
-                    # Determine the actual start and end dates
+                    # the actual start and end dates
                     actual_start_date = station_data['DATE'].min().year
                     actual_end_date = station_data['DATE'].max().year
                     
-                    # Update start_date and end_date based on actual data
                     start_date = str(actual_start_date)
                     end_date = str(actual_end_date)
 
-                # Step 5: Calculate the number of years and format the date range
+                # number of years and format the date range
                 num_years = int(end_date) - int(start_date) + 1
                 date_range = f'{start_date}-{end_date}'
 
-                # Append the result for this station
+                # append 
                 results.append([station_id, longitude, latitude, elevation, date_range, num_years])
 
-    # Step 6: Convert results into a DataFrame and save to CSV
+    # save
     results_df = pd.DataFrame(results, columns=['station_id', 'longitude', 'latitude', 'elevation', 'date', 'num_years'])
     results_df.to_csv(output_file_path, index=False)
 
