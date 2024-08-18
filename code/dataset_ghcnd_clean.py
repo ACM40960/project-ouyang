@@ -199,14 +199,59 @@ def station_summary(input_folder, inventory_file_path, output_file_path):
     print(f'Summary file created successfully at {output_file_path}')
 
 
+def calculate_monthly_avg_temperature(input_folder, output_file):
+
+    monthly_data = []
+
+    for filename in os.listdir(input_folder):
+        if filename.endswith('.csv'):
+            print(f"Processing {filename}")
+            year, month = filename.split('_')[0], filename.split('_')[1].split('.')[0]
+            date = f"{year}-{month.zfill(2)}"
+            
+            file_path = os.path.join(input_folder, filename)
+            df = pd.read_csv(file_path)
+            
+            if 'TAVG' in df.columns:
+                monthly_avg_temp = df['TAVG'].mean()
+                monthly_std_temp = df['TAVG'].std()
+                sample_size = len(df['TAVG'])
+                
+                # standard error
+                monthly_se = monthly_std_temp / np.sqrt(sample_size)
+                
+                # 95% confidence interval
+                confidence_interval = 1.96 * monthly_se
+                upper_bound = monthly_avg_temp + confidence_interval
+                lower_bound = monthly_avg_temp - confidence_interval
+                
+                monthly_data.append({
+                    'date': date,
+                    'avg_temp': monthly_avg_temp,
+                    'lower_95_CI': lower_bound,
+                    'upper_95_CI': upper_bound
+                })
+
+    output_df = pd.DataFrame(monthly_data)
+    output_df.to_csv(output_file, index=False)
+
+    print(f"Monthly average temperatures with 95% CI have been saved to {output_file}")
+
+
+
+
+
 if __name__ == '__main__':
     input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\ghcnd'
     cleaned_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\cleaned'
     output_summary = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd'
     inventory_file_path = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\Monthly_station_inventory.csv'
     output_summary_path = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\station_summary.csv'
+    bymonth_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\by_month'
+    output_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\output_land_air.csv'
 
-    station_summary(cleaned_directory, inventory_file_path, output_summary_path)
+    calculate_monthly_avg_temperature(bymonth_directory, output_directory)
+    #station_summary(cleaned_directory, inventory_file_path, output_summary_path)
 
 
 

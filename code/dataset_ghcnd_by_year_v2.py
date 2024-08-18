@@ -1,20 +1,23 @@
 '''
-spilt the cleaned dataset by month
-
+spilt the cleaned dataset by year and month
+multiple threads are used to speed up the process
 '''
 import os
 import pandas as pd
 from concurrent.futures import ThreadPoolExecutor
 
-input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\test_2'
-output_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\by_month_2'
+input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\cleaned'
+output_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\by_month'
+station_list_path = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\station_list.csv'
+
 
 def process_files(file_batch, batch_num, total_batches):
     output_data = {}
     file_count = len(file_batch)
-
+    i=0
     for file_path in file_batch:
-        print(f"Processing {file_path}")
+        i +=1
+        print(f"Processing batch {i}/{batch_num}, file {os.path.basename(file_path)}")
         df = pd.read_csv(file_path, delimiter=',')
 
         # Process each row
@@ -39,6 +42,7 @@ def process_files(file_batch, batch_num, total_batches):
                 output_data[year_month] = []
             
             output_data[year_month].append({
+                'STATION_ID': row['STATION'],
                 'LATITUDE': row['LATITUDE'],
                 'LONGITUDE': row['LONGITUDE'],
                 'TAVG': temperature
@@ -59,12 +63,24 @@ def process_files(file_batch, batch_num, total_batches):
 batch_size = 50
 num_threads = 4
 
-files = [os.path.join(root, file) for root, _, files in os.walk(input_directory) for file in files if file.endswith('.csv')]
-num_files = len(files)
-print(f"Total files to process: {num_files}")
+input_files = os.listdir(input_directory)
+input_station_names = [os.path.splitext(file)[0] for file in input_files]
 
-batches = [files[i:i + batch_size] for i in range(0, len(files), batch_size)]
+# Read station list
+station_list = pd.read_csv(station_list_path)
+station_list = station_list["station_id"]
+
+# filter out stations that are not in the station list
+station_remained = [station for station in input_station_names if station in station_list.values]
+# add the .csv extension back
+station_remained = [os.path.join(input_directory, f"{station}.csv") for station in station_remained]
+
+num_files = len(station_remained)
+
+batches = [station_remained[i:i + batch_size] for i in range(0, num_files, batch_size)]
 total_batches = len(batches)
+print(f"Total files to process: {num_files}, total batches: {total_batches}")
+
 
 with ThreadPoolExecutor(max_workers=num_threads) as executor:
     futures = [executor.submit(process_files, batch, batch_num, total_batches) for batch_num, batch in enumerate(batches, 1)]
