@@ -1,7 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file_path = 'Project\project-ouyang\code\granger_causality_results.csv'
+
+file_path = 'project-ouyang\code\granger_causality_results.csv'
 data = pd.read_csv(file_path)
 
 data.set_index('Lag', inplace=True)

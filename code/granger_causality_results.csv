@@ -1,4 +1,4 @@
-,TSI,CH4 Spline (ppb),CO2 Spline (ppm),N2O Spline (ppb),aerosol
+Lag,TSI,CH4 Spline (ppb),CO2 Spline (ppm),N2O Spline (ppb),aerosol
 Lag 1,0.2202,0.5223,0.6004,0.4837,0.6712
 Lag 2,0.3847,0.7537,0.5757,0.4386,0.2107
 Lag 3,0.2532,0.8684,0.5658,0.4872,0.2747
