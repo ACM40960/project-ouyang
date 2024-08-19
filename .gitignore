@@ -1,1 +1,3 @@
-datasets/
+datasets/ceda_miads/
+datasets/CO2_climategov/
+datasets/ghcnd/

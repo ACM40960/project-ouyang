@@ -1,0 +1,25 @@
+Johansen Test Results:
+Null Hypothesis: Rank <= 0
+Trace Statistic: 219.8381
+Critical Values (90%): 91.1090, (95%): 95.7542, (99%): 104.9637
+--------------------------------------
+Null Hypothesis: Rank <= 1
+Trace Statistic: 149.0815
+Critical Values (90%): 65.8202, (95%): 69.8189, (99%): 77.8202
+--------------------------------------
+Null Hypothesis: Rank <= 2
+Trace Statistic: 86.1562
+Critical Values (90%): 44.4929, (95%): 47.8545, (99%): 54.6815
+--------------------------------------
+Null Hypothesis: Rank <= 3
+Trace Statistic: 41.4208
+Critical Values (90%): 27.0669, (95%): 29.7961, (99%): 35.4628
+--------------------------------------
+Null Hypothesis: Rank <= 4
+Trace Statistic: 16.0640
+Critical Values (90%): 13.4294, (95%): 15.4943, (99%): 19.9349
+--------------------------------------
+Null Hypothesis: Rank <= 5
+Trace Statistic: 0.2186
+Critical Values (90%): 2.7055, (95%): 3.8415, (99%): 6.6349
+--------------------------------------
