@@ -6,9 +6,9 @@ import os
 import pandas as pd
 from concurrent.futures import ThreadPoolExecutor
 
-input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\cleaned'
-output_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\by_month'
-station_list_path = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\station_list.csv'
+input_directory = r'..\datasets\ghcnd\cleaned'
+output_directory = r'..\datasets\ghcnd\by_month'
+station_list_path = r'..\datasets\ghcnd\station_list.csv'
 
 
 def process_files(file_batch, batch_num, total_batches):

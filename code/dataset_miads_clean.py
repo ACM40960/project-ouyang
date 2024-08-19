@@ -16,9 +16,9 @@ import pandas as pd
 from datetime import datetime
 
 
-input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ceda_miads\yearly_files'
-header_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ceda_miads\MO_Column_Headers.txt'
-output_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ceda_miads\cleaned'
+input_directory = r'..\datasets\ceda_miads\yearly_files'
+header_directory = r'..\datasets\ceda_miads\MO_Column_Headers.txt'
+output_directory = r'..\datasets\ceda_miads\cleaned'
 
 # read headers and remove spaces
 with open(header_directory, 'r') as f:

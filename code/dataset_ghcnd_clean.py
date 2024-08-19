@@ -242,13 +242,13 @@ def calculate_monthly_avg_temperature(input_folder, output_file):
 
 
 if __name__ == '__main__':
-    input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\ghcnd'
-    cleaned_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\cleaned'
-    output_summary = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd'
-    inventory_file_path = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\Monthly_station_inventory.csv'
-    output_summary_path = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\station_summary.csv'
-    bymonth_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\by_month'
-    output_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\output_land_air.csv'
+    input_directory = r'..\datasets\ghcnd\ghcnd'
+    cleaned_directory = r'..\datasets\ghcnd\cleaned'
+    output_summary = r'..\datasets\ghcnd'
+    inventory_file_path = r'..\datasets\ghcnd\Monthly_station_inventory.csv'
+    output_summary_path = r'..\datasets\ghcnd\station_summary.csv'
+    bymonth_directory = r'..\datasets\ghcnd\by_month'
+    output_directory = r'..\datasets\ghcnd\output_land_air.csv'
 
     calculate_monthly_avg_temperature(bymonth_directory, output_directory)
     #station_summary(cleaned_directory, inventory_file_path, output_summary_path)

@@ -5,8 +5,8 @@ spilt the cleaned dataset by month
 import os
 import pandas as pd
 
-input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\cleaned'
-output_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ghcnd\by_month'
+input_directory = r'..\datasets\ghcnd\cleaned'
+output_directory = r'..\datasets\ghcnd\by_month'
 
 def process_file(root, file):
 

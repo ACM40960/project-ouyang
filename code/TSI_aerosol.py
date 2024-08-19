@@ -3,7 +3,7 @@ import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 
-superdataset_path = 'project-ouyang\datasets\superdataset.csv'
+superdataset_path = '..\datasets\superdataset.csv'
 superdataset_df = pd.read_csv(superdataset_path)
 
 tsi_df = superdataset_df[['year', 'TSI']]

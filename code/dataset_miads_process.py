@@ -52,9 +52,9 @@ import pandas as pd
 import numpy as np
 import os
 
-input_directory = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ceda_miads\cleaned'
-output_directory_sea_air = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ceda_miads\output_sea_air.csv'
-output_directory_sea = r'C:\mod\University\ucd1s\Project\project-ouyang\datasets\ceda_miads\output_sea.csv'
+input_directory = r'..\datasets\ceda_miads\cleaned'
+output_directory_sea_air = r'..\datasets\ceda_miads\output_sea_air.csv'
+output_directory_sea = r'..\datasets\ceda_miads\output_sea.csv'
 
 weights = {
     'A': 1.0, 'B': 0.8, 'C': 0.7, 'D': 0.9, 'E': 0.8, 'F': 0.9,
